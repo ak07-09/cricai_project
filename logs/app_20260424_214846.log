@@ -1,0 +1,11 @@
+[2026-04-24 21:48:54,437] INFO - src.components.data_builder - === DataBuilder: starting JSON parse ===
+[2026-04-24 21:48:57,042] INFO - src.components.data_builder - DataBuilder complete: 1,086 rows \u2192 data/processed/match_states.csv
+[2026-04-24 21:48:57,044] INFO - src.components.feature_engineering - === FeatureEngineering: start ===
+[2026-04-24 21:48:57,174] INFO - src.components.feature_engineering - FeatureEngineering done: (1086, 24)
+[2026-04-24 21:48:57,174] INFO - src.components.data_ingestion - Entered data ingestion
+[2026-04-24 21:48:57,352] INFO - src.utils - Saved object to artifacts/feature_columns.pkl
+[2026-04-24 21:48:57,355] INFO - src.utils - Saved object to artifacts/preprocessor.pkl
+[2026-04-24 21:49:19,546] INFO - src.utils - Saved object to artifacts/xgb_model.pkl
+[2026-04-24 21:49:20,065] INFO - src.utils - Saved object to artifacts/calibrated_model.pkl
+[2026-04-24 21:49:20,093] INFO - src.components.model_trainer - TRAIN | AUC=1.0000 | Brier=0.0028 | Acc=1.0000
+[2026-04-24 21:49:20,120] INFO - src.components.model_trainer - TEST  | AUC=0.9989 | Brier=0.0127 | Acc=0.9908

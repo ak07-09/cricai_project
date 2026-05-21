@@ -1,0 +1,12 @@
+[2026-05-21 17:09:06,097] INFO - src.components.data_builder -  DataBuilder (FIXED): starting JSON parse 
+[2026-05-21 17:09:25,323] INFO - src.components.data_builder - DataBuilder complete: 387,033 rows \u2192 data/processed/match_states.csv
+[2026-05-21 17:09:25,425] INFO - src.components.feature_engineering - === FeatureEngineering (v3 — overconfidence fix): start ===
+[2026-05-21 17:09:31,328] INFO - src.components.feature_engineering - FeatureEngineering (v3) done: (387033, 17)
+[2026-05-21 17:09:31,631] INFO - src.components.data_ingestion - Entered data ingestion (FIXED)
+[2026-05-21 17:09:36,182] WARNING - src.components.data_ingestion - match_id not in CSV — falling back to stratified row split. Re-run DataBuilder to get match_id.
+[2026-05-21 17:09:43,129] INFO - src.utils - Saved object to artifacts/feature_columns.pkl
+[2026-05-21 17:09:43,171] INFO - src.utils - Saved object to artifacts/preprocessor.pkl
+[2026-05-21 17:09:48,208] INFO - src.utils - Saved object to artifacts/xgb_model.pkl
+[2026-05-21 17:09:57,723] INFO - src.utils - Saved object to artifacts/calibrated_model.pkl
+[2026-05-21 17:09:58,900] INFO - src.components.model_trainer - TRAIN | AUC=0.9179 | Brier=0.1185 | Extreme=50.7% | Uncertain=17.0%
+[2026-05-21 17:09:59,214] INFO - src.components.model_trainer - TEST  | AUC=0.9179 | Brier=0.1186 | Extreme=50.9% | Uncertain=16.8%

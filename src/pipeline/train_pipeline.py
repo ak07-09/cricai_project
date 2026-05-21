@@ -1,25 +1,3 @@
-"""
-train_pipeline.py  (FIXED)
-===========================
-Orchestrates the full fixed training pipeline:
-
-    DataBuilder  →  FeatureEngineering  →  DataIngestion
-    →  DataTransformation  →  ModelTrainer
-
-Run this file directly:
-    python src/pipeline/train_pipeline.py
-
-All fixes are documented in the respective component files.
-Summary of pipeline-level changes:
-
-  • DataBuilder now emits match_id + season for match-wise split
-  • DataBuilder defaults to per-ball snapshots (snapshot_every_n_balls=1)
-  • DataBuilder excludes overs 18-20 (max_legal_balls=108) [FIX-DB-1]
-  • DataIngestion uses temporal match-wise split [FIX-DI-1, FIX-DI-2]
-  • FeatureEngineering drops redundant/quasi-leaky features [FIX-FE-1]
-  • ModelTrainer uses Platt calibration + Brier-score CV [FIX-MT-2, FIX-MT-6]
-"""
-
 import os
 import sys
 import time
@@ -42,23 +20,11 @@ def run_training_pipeline(
     max_matches: int = None,
     snapshot_every_n_balls: int = 1,     # FIX-DB-4: default to per-ball
     max_legal_balls: int = 108,          # FIX-DB-1: exclude overs 18-20
-):
-    """
-    Parameters
-    ----------
-    max_matches : int or None
-        Cap on JSON files parsed.  None = all.  Use 200 for smoke tests.
-    snapshot_every_n_balls : int
-        1 = every legal delivery (default, recommended).
-        6 = one row per over (faster, less data).
-    max_legal_balls : int
-        Drop snapshots beyond this ball count.
-        108 = 18 overs (recommended).  120 = include all overs (not recommended).
-    """
+):  
     t0 = time.time()
-    print("\n" + "🏏" * 30)
-    print("   CRICKET WIN PREDICTOR — FIXED TRAINING PIPELINE")
-    print("🏏" * 30)
+   
+    
+    
     print(f"\n   snapshot_every_n_balls : {snapshot_every_n_balls}")
     print(f"   max_legal_balls        : {max_legal_balls} (over {max_legal_balls//6})")
 
@@ -92,7 +58,7 @@ def run_training_pipeline(
 
         elapsed = time.time() - t0
         print(f"\n{'='*60}")
-        print(f"✅ PIPELINE COMPLETE  —  AUC={test_auc:.4f}  —  {elapsed:.1f}s")
+        print(f" PIPELINE COMPLETE  —  AUC={test_auc:.4f}  —  {elapsed:.1f}s")
         print(f"{'='*60}\n")
         return test_auc
 

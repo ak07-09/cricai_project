@@ -1,0 +1,10 @@
+[2026-05-03 13:22:03,511] INFO - src.components.data_builder - === DataBuilder (FIXED): starting JSON parse ===
+[2026-05-03 13:22:28,803] INFO - src.components.data_builder - DataBuilder complete: 387,033 rows \u2192 data/processed/match_states.csv
+[2026-05-03 13:22:28,884] INFO - src.components.feature_engineering - === FeatureEngineering (v3 — overconfidence fix): start ===
+[2026-05-03 13:22:34,091] INFO - src.components.feature_engineering - FeatureEngineering (v3) done: (387033, 17)
+[2026-05-03 13:22:34,094] INFO - src.components.data_ingestion - Entered data ingestion (FIXED)
+[2026-05-03 13:22:38,694] WARNING - src.components.data_ingestion - match_id not in CSV — falling back to stratified row split. Re-run DataBuilder to get match_id.
+[2026-05-03 13:22:45,813] INFO - src.utils - Saved object to artifacts/feature_columns.pkl
+[2026-05-03 13:22:45,844] INFO - src.utils - Saved object to artifacts/preprocessor.pkl
+[2026-05-03 13:24:13,096] INFO - src.utils - Saved object to artifacts/xgb_model.pkl
+[2026-05-03 13:24:13,100] ERROR - __main__ - Error occurred in python script name [E:\ml_project-main\src\components\model_trainer.py] line number [162] error message [The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.]

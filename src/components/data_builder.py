@@ -1,50 +1,3 @@
-"""
-data_builder.py  (FIXED)
-========================
-Builds a ball-by-ball match-state dataset from raw Cricsheet JSON files.
-
-═══════════════════════════════════════════════════════════════════
-FIX LOG — what this file corrects vs. the submitted version
-═══════════════════════════════════════════════════════════════════
-
-FIX-DB-1  Late-game snapshot exclusion (NEW)
-   The original emitted snapshots all the way to ball 120 (the last legal
-   delivery).  In overs 18-20 the match outcome is almost always settled,
-   so rows near the end always carry extreme labels (0 or 1) with no
-   uncertainty.  The model learns "late game → certainty" and applies that
-   shortcut everywhere.
-   → Added  max_legal_balls  config (default 108 = 18 overs).
-     Snapshots after ball 108 are silently dropped so the model never
-     trains on "certain" end-states.
-
-FIX-DB-2  Season kept as a usable split key (PRESERVED)
-   The original version included `season` in the CSV.  This is correct:
-   DataIngestion uses it for time-based splitting (see data_ingestion.py).
-   We keep it but ensure it is NOT passed to the feature matrix.
-
-FIX-DB-3  match_id added to CSV (NEW)
-   A unique match identifier is essential for match-wise grouping during
-   the train/test split (FIX-DI-1 in data_ingestion.py).  Without it,
-   rows from the same match can end up in both train and test, creating
-   label leakage across deliveries.
-   → Derived from filename stem (Cricsheet convention: date_teams.json).
-
-FIX-DB-4  snapshot_every_n_balls default changed to 1 (CHANGED)
-   Per-over snapshots (every 6 balls) discard granular mid-over state
-   variation and reduce training data 6-fold.  Ball-by-ball data gives
-   the model richer exposure to every pressure situation.
-   → Default is now 1 (every legal delivery).  Set to 6 for fast runs.
-
-FIX-DB-5  min_legal_balls raised to 12 (CHANGED)
-   Rows before the end of over 2 contain almost no meaningful state
-   (score 0-5, target unchanged).  The original min of 6 let the very
-   first over through; raising to 12 (end of over 2) reduces noise.
-
-No features are pre-computed here beyond raw match state — all derived
-features live in feature_engineering.py so changes propagate correctly
-to inference without touching the builder.
-"""
-
 import os
 import json
 import glob
@@ -93,9 +46,9 @@ class DataBuilder:
 
     def build(self) -> str:
         """Parse all JSON files and write match_states.csv. Returns output path."""
-        logger.info("=== DataBuilder (FIXED): starting JSON parse ===")
-        print("\n" + "=" * 60)
-        print("📂 DATA BUILDER (FIXED) — Ball-by-Ball Parser")
+        logger.info(" DataBuilder (FIXED): starting JSON parse ")
+        
+       
         print("=" * 60)
         print(f"   Snapshot every  : {self.config.snapshot_every_n_balls} legal ball(s)")
         print(f"   Min legal balls : {self.config.min_legal_balls}  (over {self.config.min_legal_balls//6})")
@@ -127,7 +80,7 @@ class DataBuilder:
         os.makedirs(os.path.dirname(self.config.output_path), exist_ok=True)
         df.to_csv(self.config.output_path, index=False)
 
-        print(f"\n✅ Parsed   : {parsed} matches")
+        print(f"\n Parsed   : {parsed} matches")
         print(f"   Skipped  : {skipped} matches")
         print(f"   Rows     : {len(df):,}")
         print(f"   Label=1  : {df['batting_team_won'].mean()*100:.1f}% (chaser won)")
@@ -162,7 +115,7 @@ class DataBuilder:
         match_type = info.get("match_type", "T20")
         season = str(info.get("season", "Unknown"))
 
-        # FIX-DB-3: derive a stable match_id from the file name
+        
         match_id = os.path.splitext(os.path.basename(path))[0]
 
         innings_list = data.get("innings", [])

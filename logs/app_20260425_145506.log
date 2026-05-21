@@ -1,0 +1,10 @@
+[2026-04-25 14:55:11,027] INFO - src.components.data_builder - === DataBuilder (FIXED): starting JSON parse ===
+[2026-04-25 14:55:28,149] INFO - src.components.data_builder - DataBuilder complete: 387,033 rows \u2192 data/processed/match_states.csv
+[2026-04-25 14:55:28,251] INFO - src.components.feature_engineering - === FeatureEngineering (v3 — overconfidence fix): start ===
+[2026-04-25 14:55:32,811] INFO - src.components.feature_engineering - FeatureEngineering (v3) done: (387033, 17)
+[2026-04-25 14:55:32,814] INFO - src.components.data_ingestion - Entered data ingestion (FIXED)
+[2026-04-25 14:55:37,222] WARNING - src.components.data_ingestion - match_id not in CSV — falling back to stratified row split. Re-run DataBuilder to get match_id.
+[2026-04-25 14:55:44,261] INFO - src.utils - Saved object to artifacts/feature_columns.pkl
+[2026-04-25 14:55:44,435] INFO - src.utils - Saved object to artifacts/preprocessor.pkl
+[2026-04-25 14:55:50,144] INFO - src.utils - Saved object to artifacts/xgb_model.pkl
+[2026-04-25 14:55:56,310] INFO - src.utils - Saved object to artifacts/calibrated_model.pkl

@@ -1,0 +1,4 @@
+[2026-05-21 18:05:13,021] INFO - src.utils - Loaded object from artifacts/calibrated_model.pkl
+[2026-05-21 18:05:13,130] INFO - src.utils - Loaded object from artifacts/preprocessor.pkl
+[2026-05-21 18:05:13,130] INFO - src.utils - Loaded object from artifacts/feature_columns.pkl
+[2026-05-21 18:05:13,130] INFO - src.pipeline.predict_pipeline - Artifacts loaded
